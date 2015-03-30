@@ -1,0 +1,14 @@
+<% provide(:title, "Social Curriclum Planning for Teachers. Request an Invite Today!") %>
+<%= render 'layouts/navbar_empty' %>
+
+<% content_for :chalkboard_promo_text do %>
+	<h1>Teach Better, Together.</h1>
+	<h2>Swibat is a community of teachers who work together to build and share great courses, help each other out, and make our schools awesome.</h2>
+	<a class="primary-cta-btn" href="#accessModal" data-toggle="modal">Request an Invite!</a>
+<% end %>
+<%= render 'static_pages/hero_signup' %>
+<%= render 'feature_footer' %>
+
+<div id="accessModal" class="modal hide fade">
+	<%= render 'forms/lead_form_modal' %>
+</div>

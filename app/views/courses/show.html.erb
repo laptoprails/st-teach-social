@@ -1,0 +1,95 @@
+<% provide(:title, "#{@course.course_name}") %>
+<div class="row-fluid">
+  <%= render 'shared/user_header' %>
+
+  <header class="course-header">    
+    <%= render 'courses/course_header' %>
+  </header>
+
+  <div class="course-organizer">
+    <div class="box-row">
+      <div class="span12 box box-bottom-margin">
+        <h3>Course Summary</h3>
+        <p><%= best_in_place_if (can? :edit, @course), @course, :course_summary, type: :textarea %></p>
+      </div>
+
+      <div class="span12 no-left-margin box-bottom-margin">
+        <div class="span6 box height5">
+          <h3>Standards Met:</h3>
+          <div class="corestandards-accordion">
+            <% @course.units.each do |unit| %>
+              <h3><%= unit.unit_title %></h3>
+              <div>
+                <%= display_standards_for_unit(unit) %>              
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="span6 box height5 goals-covered" id="course-goals">
+          <h3>Course Goals
+          <span>
+            <%= link_to '<i class="icon-plus"></i>'.html_safe, new_course_goal_course_path(@course), id:"add-course-goal", remote: true if can? :edit, @course %>
+          </span>
+          </h3>
+          <ul class="goal-list" id="course-goal-list">
+            <% @course.objectives.collect do |objective| %>
+                <li id="<%= dom_id(objective) %>"><%= objective.objective %>
+                    <span><%= link_to '<i class="icon-trash"></i>'.html_safe, [objective.objectiveable, objective], method: :delete, class: "delete-goal", remote: true if can? :destroy, @course %></span>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="span12 no-left-margin box-bottom-margin">
+        <div class="span6 box height6 no-left-margin">
+          <h3>Course Units
+          <span>
+            <%= link_to '<i class="icon-plus"></i>'.html_safe, new_course_unit_path(@course), id:"course-add-unit" if can? :edit, @course %>
+          </span>
+          </h3>
+          <% if @course.units.count == 0 %>
+              <p>No units have been added yet. <%= link_to "Add one now.", new_course_unit_path(@course) if can? :edit, @course %></p>
+          <% else %>
+              <ul>
+                <% @course.units.each do |unit| %>
+                    <li><%= link_to "#{unit.unit_title}", course_unit_path(@course, unit) %></li>
+                <% end %>
+              </ul>
+          <% end %>
+        </div>
+
+        <div class="span6 box height6">
+          <h3>Related Courses</h3>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="span12 no-left-margin">
+    <header class="course-header">
+      <h2>Comments</h2>
+    </header>
+    <section class="course-info">
+      <%= render :partial => 'comments/comments', :locals => {:commentable => @course} %>
+    </section>
+  </div>
+</div>
+
+<% content_for :sidebar do %>
+ 
+
+    <%= render 'layouts/application_feed' %>
+
+    <div class="sidebar">
+      <header class="course-header">
+        <h4>Fork this course!</h4>
+      </header>
+      <section>
+        <p>Copy this course along with all its units and lessons into your own courses collection</p>
+        <%= link_to "Fork Course", fork_course_path(@course), method: "post", class: "btn btn-monkey" %>
+      </section>
+    </div>
+<% end %>

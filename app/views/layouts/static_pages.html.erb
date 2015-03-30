@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render 'layouts/head_content' %>
+</head>
+<body class="patterned">
+    <div id="main" role="main">
+        <div class="content">
+          <div class="row-fluid">
+            <div class="span12">
+              <%= render 'layouts/messages' %>
+            </div><!--end of .span12 -->
+          </div><!--end of .row-fluid -->
+
+          <%= yield %>
+
+          <div class="row-fluid">
+            <div class="span12">
+              <%= render 'layouts/footer' %>
+            </div>
+          </div>
+
+
+        </div><!--end of .content> -->
+    </div><!--end of .main> -->
+</body>
+</html>

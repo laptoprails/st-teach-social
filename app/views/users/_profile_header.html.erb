@@ -1,0 +1,23 @@
+<div class="profile-header">
+  <%= image_tag @user.image.url, class:"img-polaroid header-profile-picture", alt: "#{@user.full_name}" %>
+
+  <div class="profile-summary">    
+    <h2><%= @user.full_name %></h2>    
+    <p>
+      <%= @user.profile_summary %>
+    </p>
+    <%= display_profile_institution(@user) %>
+
+      <% if @user.links.any? %>
+          <% @user.links.each do |link| %>
+        <dt><%= link.link_type.split(' ').first %>:</dt>
+        <dd>
+          <%= link.url %><br />
+          <% end %>
+        </dd>
+      <% end %>
+    </dl>
+    <%= display_follow_actions @user if @user != current_user %>    
+    <%= link_to "Add Some Personality!", edit_user_path(current_user), :class => "btn btn-monkey pull-left" if can? :update, @user %>
+  </div>
+</div>

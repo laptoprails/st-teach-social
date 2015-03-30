@@ -1,0 +1,11 @@
+<div class="sidebar">
+  <header class="course-header">
+    <h4>Can you help?</h4>
+  </header>
+  <section>
+    <% Question.sidebar.each do |question| %>
+        <%= link_to question.title, question_path(question), class:"sidebar-link" %>
+    <% end %>
+
+  </section>
+</div>

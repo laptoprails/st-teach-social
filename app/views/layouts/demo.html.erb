@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render 'layouts/head_content' %>
+</head>
+
+<body class="plain-bg">
+<div id="main" role="main">
+  <div class="content">
+    <%= render 'layouts/navbar' %>
+    <div class="row-fluid">
+      <div class="span12">
+        <%= render 'layouts/messages' %>
+      </div><!--end of .span12 -->
+    </div><!--end of .row-fluid -->
+
+    <%= yield %>
+
+  </div><!--end of .content> -->
+</div><!--end of .main> -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+// Place all the styles related to the courses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/********************************
+Variables
+********************************/
+//Fonts
+$header-gradient-dark-color: #2B2F3A;
+$header-gradient-light-color: #50596D;
+$open-sans: 'Open Sans', 'Helvetica Neue Light', sans-serif;
+$fancy-gray: rgba(80, 89, 109, 0.9);
+$soft-gray: rgba(80, 89, 109, 0.5);
+$lightest-gray: #CDCDCD;
+$fancy-red: #a43220;
+
+
+//Padding and Such
+$page-width: 980px;
+$box-margin: 1.7em !important;
+
+/*********************************
+Begin Course-specific css - but make
+sure to copy over variables
+*********************************/
+
+div.course-form{
+  float:left;
+
+  header.course-form-header{
+    margin-bottom: 2%;
+
+    h1{
+      color: #5f6e68;
+      text-shadow: 2px 2px rgba(234, 231, 231, 0.8);
+    }
+
+  }
+
+  form {
+    $minFormHeight: 1.8em;//18px:10px
+
+    padding: 2%;
+    float:left;
+
+    div.two-column-form{
+      width:100%;
+      float:left;
+      clear:both;
+      margin-top: 2%;
+
+      label{
+        width:40%;
+        display: inline-block;
+        float: left;
+      }
+
+      input[type="select"]{
+        display: inline-block;
+        width: 40%;
+        height:$minFormHeight;
+      }
+    }
+
+    div.form-row{
+      width:100%;
+      float:left;
+      text-align:right;
+    }
+
+    label, p {
+      font-size: 1.6em; //16px : 10px
+      margin: 10px 0px 10px 0px;
+    }
+
+    input[type="text"], textarea{
+      width: 100%;
+      min-height: $minFormHeight;
+      font-size: 1.3em;
+      color: rgba(80, 89, 107, 0.90);
+    }
+    input[type="text"].cleared{
+      clear:right;
+    }
+
+    input[type="text"].single-edit-input{
+      width:83%;
+    }
+
+    textarea{
+      height: 6em;
+    }
+  }
+}
+
+div.favoritecount{
+
+}
+
+div#user-header{
+  display: block;
+  float: left;
+  width: 100%;
+
+  img.header-profile-picture{
+    width: 8em;
+    height: 8em;
+  }
+
+  h3{
+    padding-top: 1em;
+
+    a{
+      color: #50596D;
+    }
+
+    a:hover{
+      color: rgb(164, 50, 32);
+      text-decoration: none;
+    }
+  }
+}
+
+div#course-summary, div.course-overview, div#syllabus{
+  float:left;
+
+  section.course-info{
+    float:left;
+    width:100%;
+
+    p.none-provided{
+      font-style: italic;
+    }
+
+    header{
+      float:left;
+      width:100%;
+
+      h2{
+        //font-size: 1.3077em;//17px:13px
+        font-size: 1.23076923em;//16px:13px
+        float:left;
+        //color: rgb(164, 50, 32);
+        width: 100%;
+
+        a{
+          font-size:0.8em;
+        }
+
+      }
+
+      a.get-syllabus, a.edit-course-unit, a.see-course-unit, a.edit-unit-lesson, a.see-unit-lesson{
+        display: inline-block;
+        margin-top: 0.5em;
+      }
+
+    }
+
+    article{
+      float:left;
+      width:100%;
+      //background: rgba(152, 161, 186, 0.1);
+
+    }
+
+    div.comments{
+      padding-left: 3%;
+    }
+
+    div.comment-field{
+
+      textarea{
+        width:100%;
+        height: 4em;
+      }
+
+    }
+
+  }
+
+}
+
+p.question{
+  font-size: 1.07692308em;//14px:13px
+  margin-top: 0.5em;
+  float: left;
+  width: 100%;
+}
+
+header.course-header, header.index-header{
+  margin-top: 2em; //20px:10px
+  margin-bottom: 2em;//20px:10px
+  float:left;
+  width:100%;
+
+
+  h1, h2, h3{
+    color: #a43220;
+    //color: $fancy-gray;
+    //font-weight: 300;
+  }
+
+  h1{
+    line-height: 1em;
+
+    span{
+      i{
+        display: inline-block;
+        margin-top: 8px;
+      }
+    }
+  }
+
+  h2 {
+    float:left;
+  }
+
+  h3{
+
+    span{
+      font-size: 0.7647em;
+    }
+
+  }
+
+  a.disguised-header-link{
+    color: #5f6e68;
+  }
+
+  .title-icon{
+    display:inline-block;
+    margin-top: 0.9em;
+    margin-left: 0.5em;
+    float: left;
+  }
+
+  .pulled-icon{
+    display: inline-block;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+  }
+
+}
+
+div.unit-header{
+  float: left;
+  width: 100%;
+  color: $fancy-gray;
+
+  p.calendar{
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 0px;
+  }
+
+  a{
+    color: $fancy-gray;
+  }
+}
+
+div.course-organizer{
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  color: $fancy-gray;
+  float: left;
+  width: 100%;
+  margin-top: 1em;
+
+  h1, h2, h3{
+    //color: #a43220;
+  }
+
+  div.box{
+    background: #ffffff !important;
+    border: 1px solid #bfbfbf;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 0.5em;
+
+    ul{
+      margin-left: 0px;
+
+      li{
+        list-style: none;
+        padding: 0.25em;
+        padding-left: 1em;
+      }
+      li:nth-child(odd){
+        background: #e7e7e7;
+      }
+
+      i{
+        display: inline-block;
+        float: right;
+      }
+    }
+  }
+
+  div.box-row{
+    float: left;
+    width: 100%;
+
+    div.span12{
+      background: none;
+    }
+
+    .no-border{
+      border: none !important;
+    }
+
+    .no-bottom-margin{
+      margin-bottom: 0px !important;
+    }
+
+    .height1{
+      min-height: 3em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height2{
+      min-height: 6em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height3{
+      min-height: 9em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height4{
+      min-height: 11em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height5{
+      min-height: 15em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height6{
+      min-height: 19em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height7{
+      min-height: 21em;
+      margin-bottom: 1em;
+      overflow: auto;
+    }
+
+    .height8{
+      min-height: 24em;
+      overflow: auto;
+    }
+
+    .height9{
+      min-height: 27em;
+      overflow: auto;
+    }
+
+    .height10{
+      min-height: 30em;
+      overflow: auto;
+    }
+
+    .height11{
+      min-height: 33em;
+      overflow: auto;
+    }
+
+    .height12{
+      min-height: 35em;
+      overflow: auto;
+    }
+
+  }
+
+
+  h3{
+    font-weight: 400;
+    margin-left: 0.7692em;//10px:13px
+
+    span{
+      i{
+        display: inline-block;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  p{
+    margin-left: 1em;//10px:13px
+  }
+
+  ul{
+    li:hover{
+      background: #e7e7e7;
+    }
+  }
+
+  .box-top-margin{
+    margin-top: $box-margin;
+  }
+
+  .box-right-margin{
+    margin-right: $box-margin;
+  }
+
+  .box-bottom-margin{
+    margin-bottom: $box-margin;
+  }
+
+  .box-left-margin{
+    margin-left: $box-margin;
+  }
+
+  div.box-container{
+    float: left;
+    min-width: 35.4em; //354px:10px;
+  }
+
+}
+
+
+
+
+
+
+
+
+

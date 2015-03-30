@@ -1,0 +1,3 @@
+var course_goal = $('<%= j render(partial: 'objectives/course_goal', object: @objective) %>');
+$('#course-goal-list').append(course_goal);
+$('#add-course-goal-form').remove();

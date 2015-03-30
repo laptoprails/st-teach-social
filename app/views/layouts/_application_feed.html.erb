@@ -1,0 +1,11 @@
+<div class="span12 micropost-sidebar">
+	<h3>Tweachings</h3>
+	<% if signed_in? %>
+		<%= render 'microposts/form_micropost' %>
+	<% end %>
+	<% if @microposts.any? %>
+		<ol class="microposts" data-url="<%= microposts_url(user_id: @user.id) %>">
+			<%= render partial: 'microposts/micropost', collection: @microposts %>
+		</ol>	
+	<% end %>
+</div>

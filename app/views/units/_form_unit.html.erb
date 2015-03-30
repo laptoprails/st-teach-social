@@ -1,0 +1,63 @@
+  <%= form_for [@course, @unit] do |unit| %>
+      <%= render 'shared/form_error_messages', object: unit.object %>
+
+
+      <%= unit.label "What big question does this unit answer?" %>
+      <%= unit.text_field :unit_title, id:"unit_title", placeholder:"Unit Title", class: 'objectiveable-name', onblur: "retrieveSimilarObjectiveables('Unit', 'name')" %>
+
+
+      <%= unit.label :prior_knowledge, "What will students need to know before you start?" %>
+      <%= unit.text_field :prior_knowledge, id:"prior_knowledge", placeholder:"Prior Knowledge" %>
+
+      <%= unit.label :objectives, "What should students be able to do when it's over?" %>
+      <%= unit.fields_for :objectives do |objective| %>
+          <%= render "shared/objective_fields", :f => objective, objectiveable_type: 'Unit' %>
+      <% end %>
+      <%= link_to_add_fields '<i class="icon-plus icon-white"></i>', unit, :objectives, "btn btn-monkey" %>
+
+      <%= unit.label :assessments, "How will you assess their learning?" %>
+      <%= unit.fields_for :assessments do |assessment| %>
+          <%= render "shared/assessment_fields", :f => assessment %>
+      <% end %>
+      <%= link_to_add_fields '<i class="icon-plus icon-white"></i>', unit, :assessments, "btn btn-monkey" %>
+
+      <p>How long will the unit last?</p>
+      <div class="form-row">
+        <div class="span1">
+          <%= unit.label :expected_start_date, "From:" %>
+        </div>
+        <div class="span6">
+          <%= unit.text_field :expected_start_date, class:"datepicker" %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="span1">
+          <%= unit.label :expected_end_date, "To:" %>
+        </div>
+        <div class="span6">
+          <%= unit.text_field :expected_end_date, class:"datepicker" %>
+        </div>
+      </div>
+
+    <div class="two-column-form">
+      <div class="pull-left">
+        <%= unit.submit "Save and Come Back Later", name:"submit", class:"btn btn-monkey" %>
+
+      </div>
+      <div class="pull-right">
+        <%= unit.submit "Add Some Lessons", name:"move_on", class:"btn btn-monkey" %>
+
+      </div>
+    </div>
+
+  <% end %>
+
+<%= content_for :sidebar do %>
+    <%= content_for :sidebar_invite do %>
+        <%= render 'shared/sidebar_invite' %>
+    <% end %>
+    <%= render 'layouts/application_sidebar' %>
+    <%= render 'shared/sidebar_related_units' %>
+
+<% end %>

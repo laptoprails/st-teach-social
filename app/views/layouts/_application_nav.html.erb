@@ -1,0 +1,31 @@
+<header class="navbar hidden-print" id="application-header">
+  <div class="row-fluid">
+    <div class="span12">
+      <h1 class="application-nav-header"><%= show_institution %></h1>
+
+    </div>
+  </div>
+  <div class="row-fluid">
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <div class="navdiv">
+      <div class="nav-collapse collapse">
+        <nav class="application-nav">
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <%= show_current_user_courses %>
+              <li><%= link_to "maps", "#" %></li>
+              <%= show_current_user_calendar %>
+              <li><%= link_to "colleagues", "#" %></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+

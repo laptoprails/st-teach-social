@@ -1,0 +1,196 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+div.application-body{
+  width: 95%;
+  margin: 0px auto;
+
+  div.application-row{
+    //width:100%;
+    float:left;
+    margin: 0 0 2% 0;
+  }
+
+  div.profile-header{
+    width: 100%;
+    float:left;
+    //background: #ffffff;
+
+    div.profile-summary{
+      float:left;
+      margin-top: 2%;
+      margin-bottom: 2%;
+      margin-left: 2%;
+      width: 75%;
+
+      dl.dl-horizontal{
+        width: 100%;
+
+        dt {
+          text-align: left;
+          width: 20%;
+        }
+        dd {
+          margin-left: 0px;
+        }
+      }
+    }
+
+  }
+
+  div.invite-block{
+    background: rgba(234, 231, 216, 1);
+    text-align: center;
+    padding: 5%;
+    float:left;
+  }
+
+  div.signup-block{
+    background: rgba(152, 161, 186, 0.1);
+    text-align: center;
+    padding: 5%;
+    float: left;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  div.sidebar-profile{
+    background: rgba(152, 161, 186, 0.1);
+    padding: 5%;
+    margin-top: 1em;
+    float:left;
+    width: 90%;
+
+    img{
+      width: 3em;
+      height: 3em;
+      display: inline-block;
+      float:left;
+      margin-right: 5%;
+      border: 2px solid #FFF;
+
+      -moz-box-shadow: 2px 2px 5px rgb(1, 21, 38);
+      box-shadow: 2px 2px 5px rgb(1, 21, 38);
+    }
+
+  }
+
+
+
+  .small-padding{
+    padding: 1%;
+  }
+
+  .medium-padding{
+    padding: 2% 2% 2% 2%;
+    width: 30%;
+    font-size: 1.23em;
+  }
+
+  form.profile-form{
+    //display:block;
+    //float:left;
+
+
+    label{
+      margin-top: 1.1em;
+    }
+
+    ul.nav-pills{
+
+      a{
+        color: #50596D;
+      }
+
+      .active > a, .active > a:hover{
+        background-color: rgb(164, 50, 32);
+        color: #ffffff;
+      }
+
+    }
+
+    ul.nav, input[type="text"], textarea{
+      font-size:1.1em;
+    }
+
+    div.link-fields{
+      .span2 {
+        display:inline-block;
+        float:left;
+      }
+
+      .input-append{
+        float:left;
+        margin-left: 2%;
+      }
+    }
+  }
+
+}
+
+
+
+div.course-overview, div.sidebar{
+  float:left;
+  width:100%;
+  //border: solid 1px #e7e7e7;
+  //padding: 5px;
+  margin: 1.5385em 0 0 0;//20px:13px
+
+  header.course-header{
+    float:left;
+    width: 100%;
+    clear:both;
+    border-bottom: 1px solid rgba(152, 161, 186, 0.5);
+    color: rgb(164, 50, 32);
+
+    h3{
+      font-size:1.538462em;
+      float:left;
+      width:50%;
+      margin-bottom: 0.25em; //05px:20px
+      }
+
+    h3.wide{
+      width:100%;
+    }
+
+    h4 {
+      font-size: 1.3077em; //17px:13px
+      margin-bottom: 2%;
+    }
+
+  }
+
+}
+
+.user-content-summary{
+  color: #50596D;
+
+  li, p{
+    float:left;
+    //font-size: 1.2308em; //16px:13px
+    font-size: 1.07692308em;
+    margin-top:0.5em;
+    padding-left: 15px;
+  }
+
+  a.gray{
+    color: #50596D;
+  }
+
+  header{
+    h3{
+      font-size: 1.230769em; //16px:13px
+    }
+  }
+
+}
+
+.main-profile-picture{
+  width: 20.5em;
+  height: 20em;
+}
+
+
+

@@ -1,0 +1,215 @@
+<% provide(:title, "#{@lesson.lesson_title}") %>
+<div class="row-fluid">
+  <%= render 'shared/user_header' %>
+  <div class="unit-header">
+    <p class="calendar">
+      <%= @lesson.lesson_start_date.strftime("%B %d") %> - <%= @lesson.lesson_end_date.strftime("%B %d, %Y") %>
+    </p>
+    <h2>
+      <span>
+        <%= link_to "#{@unit.course.course_name.titleize}", course_path(@unit.course), class:"disguised-header-link" %> / <%= link_to "#{@unit.unit_title.titleize}", course_unit_path(@course, @unit), class:"disguised-header-link" %> / <br/>
+        <%= @lesson.lesson_title.titleize %>
+      </span>
+      <span>
+        <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_unit_lesson_path(@unit, @lesson), class:"edit-unit-lesson" if can? :edit, @lesson %>
+      </span>
+      <span>
+        <%= link_to '<i class="icon-ok"></i>'.html_safe, "#completeLessonModal", data: {toggle: "modal", title: "Mark the lesson complete"} %>
+      </span>
+    </h2>
+  </div>
+
+  <div class="course-organizer">
+    <div class="box-row">
+      <div class="span12 box-bottom-margin">
+        <div class="span6 box no-left-margin height7 standards">
+          <h3>Standards Met
+            <span>
+              <%= link_to '<i class="icon-plus"></i>'.html_safe, standards_lesson_path(@lesson), class:"add-standard" if can? :edit, @unit %>
+            </span>
+          </h3>
+          <ul>
+            <%= display_standards_for_lesson(@lesson) %>            
+          </ul>
+        </div>
+        <div class="span6 box height7 assessable">
+          <h3>Assessments
+            <span>
+              <%= link_to '<i class="icon-plus"></i>'.html_safe, new_lesson_assessment_path(@lesson), class:"add-lesson-assessment", remote: true if can? :edit, @lesson %>
+            </span>
+          </h3>
+          <%= list_assessments(@lesson) %>
+        </div>
+      </div>
+
+      <div class="span12 box-bottom-margin no-left-margin">
+        <div class="span6 box no-left-margin height7 content-covered" id="lesson_content">
+          <h3>Content Covered
+            <span>
+              <%= link_to '<i class="icon-plus"></i>'.html_safe, new_lesson_content_lesson_path(@lesson), class:"add-lesson-objective", remote: true if can? :edit, @lesson %>
+            </span>
+          </h3>
+            <%= lesson_content(@lesson) %>
+        </div>
+
+        <div class="span6 box height7 skill-covered" id="lesson_skills">
+          <h3>Skills
+            <span>
+              <%= link_to '<i class="icon-plus"></i>'.html_safe, new_lesson_skill_lesson_path(@lesson), class:"add-lesson-objective", remote: true if can? :edit, @lesson %>
+            </span>
+          </h3>
+          <%= lesson_skills(@lesson) %>
+        </div>
+
+      </div>
+
+      <div class="span12 box box-bottom-margin no-left-margin height7" id="activities">
+        <h3>Learning Strategies
+            <span>
+              <%= link_to '<i class="icon-plus"></i>'.html_safe, "#", class:"add-new-activity" if can? :edit, @unit %>
+            </span>
+        </h3>
+        <% if @lesson.activities.count > 0 %>
+            <ul>
+              <% @lesson.activities.each do |activity| %>
+                  <li id="<%= dom_id(activity) %>">
+                    <%= activity.activity %> - <%= activity.duration %>, <span><%= activity.agent %></span>
+                    <span><%= link_to '<i class="icon-trash"></i>'.html_safe, [activity.lesson, activity], method: :delete, remote: true if can? :destroy, activity %></span>
+                  </li>
+              <% end %>
+            </ul>
+        <% end %>
+        <div id="activity-form">
+          <%= render 'form_activity' %>
+          <%= link_to "Done Adding", "#", class:"remove-new-activity" %>
+        </div>
+      </div>
+
+      <div class="span12 box-bottom-margin no-left-margin">
+        <div class="span6 box no-left-margin height5">
+          <h3>Resources</h3>
+          <% if @lesson.resources.count == 0 %>
+              <p>No resources have been added yet. <%= link_to "Add some.", edit_unit_lesson_path(@unit, @lesson) if can? :update, @lesson %></p>
+          <% else %>
+              <ul>
+                <% @lesson.resources.each do |resource| %>
+                    <li>
+                      <% if resource.upload_file_name %>
+                          <%= link_to resource.name, resource.upload.url, title: "Download resource" %>
+                      <% else %>
+                          <%= resource.name %>
+                      <% end %>
+                    </li>
+                <% end %>
+              </ul>
+          <% end %>
+        </div>
+        <div class="span6 box height5">
+          <h3>Videos</h3>
+          <% if @lesson.videos.count == 0 %>
+              <p>No videos have been uploaded for this lesson. <%= link_to "Upload one", new_lesson_video_path(@lesson) %>.</p>
+          <% else %>
+            <ul class="videos">
+              <% @lesson.videos.each do |video| %>
+                  <li>
+                    <%= link_to image_tag("http://img.youtube.com/vi/#{video.yt_video_id}/1.jpg"), lesson_video_path(@lesson, video) %>
+                    <%= link_to video.title, lesson_video_path(@lesson, video) %>
+                  </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="span12 no-left-margin">
+    <header class="course-header">
+      <h2>Comments</h2>
+    </header>
+    <section class="course-info">
+      <%= render :partial => 'comments/comments', :locals => {:commentable => @unit} %>
+    </section>
+  </div>
+
+</div>
+
+<% content_for :sidebar do %>
+    <%= content_for :sidebar_profile do %>
+        <%= render 'shared/sidebar_profile' %>
+    <% end %>
+
+    <%= content_for :sidebar_invite do %>
+        <%= render 'shared/sidebar_invite' %>
+    <% end %>
+
+    <%= content_for :sidebar_other_unit_lessons do %>
+        <%= render 'shared/sidebar_other_unit_lessons' %>
+    <% end %>
+
+    <%= content_for :sidebar_related_lessons do %>
+      <%= render 'shared/sidebar_related_lessons' %>
+    <% end %> 
+
+    <%= render 'layouts/application_sidebar' %>        
+<% end %>
+
+<div id="completeLessonModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2>WooHoo! Another lesson completed!</h2>
+  </div>  
+  <%= form_for @journal_entry, url: update_journal_entry_lesson_url(@lesson), method: :post, remote: true, id: 'complete_lesson_form' do |form| %>
+    <div class="modal-body">
+      <p>Now, that it's over, let's take a minute to ask a few quick questions.<br/>
+        On your assessment, what was:
+      </p>
+        <div class="row-fluid">
+          <div class="span11">
+           <label for="average_score">the average score (%)?</label>
+            <%= form.text_field :average_score, class: "span11" %>
+          </div>          
+        </div>
+
+        <div class="row-fluid">
+          <div class="span11">
+           <label for="median_score">the median score (%)?</label>
+            <%= form.text_field :median_score, class: "span11" %>
+          </div>          
+        </div>
+
+        <div class="row-fluid">
+          <div class="span11">
+           <label for="highest_score">the highest score (%) ?</label>
+            <%= form.text_field :highest_score, class: "span11" %>
+          </div>          
+        </div>
+
+        <div class="row-fluid">
+          <div class="span11">
+           <label for="lowest_score">the lowest score (%)?</label>
+            <%= form.text_field :lowest_score, class: "span11" %>
+          </div>          
+        </div>
+
+        <div class="row-fluid">
+          <div class="span11">
+           <label for="lesson_pros">What about the lesson went well?</label>
+            <%= form.text_area :lesson_pros, class: "span11", rows: "4" %>
+          </div>          
+        </div>
+
+        <div class="row-fluid">
+          <div class="span11">
+           <label for="lesson_cons">What would you do differently?</label>
+            <%= form.text_area :lesson_cons, class: "span11", rows: "4" %>
+          </div>          
+        </div>
+      
+    </div>
+    <div class="modal-footer">
+      <%= form.submit "Done", class: "btn btn-monkey" %>
+      <button class="btn btn-monkey modal-dismiss" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  <% end %>
+</div>

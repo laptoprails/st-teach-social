@@ -1,0 +1,3 @@
+var target = $('.goals-covered');
+var form = $('<%= j render partial:'forms/form_objective_goal', locals:{objectiveable: @course} %>')
+target.append(form);
